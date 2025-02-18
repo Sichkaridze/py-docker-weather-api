@@ -1,9 +1,9 @@
 FROM python:3.10-alpine
 LABEL authors="dima.sichkar2003@gmail.com"
 
-ENV PYTHOUNNBUFFERED 1
+ENV PYTHONUNBUFFERED 1
 
-WORKDIR app/
+WORKDIR /app
 
 COPY requirements.txt requirements.txt
 

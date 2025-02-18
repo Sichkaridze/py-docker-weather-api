@@ -31,12 +31,14 @@ if LANGUAGE:
 
 
 def get_weather() -> None:
+    if not PARAMS.get("key"):
+        raise ValueError("API_KEY environment variable is not set correctly.")
     response = requests.get(URL, params=PARAMS)
 
     try:
         assert response.status_code == 200
     except AssertionError:
-        print("Bad request")
+        raise Exception("Bad request")
 
     data = response.json()
 
@@ -45,7 +47,8 @@ def get_weather() -> None:
 
     temp_c = current_weather.get("temp_c")
     last_updated = current_weather.get("last_updated")
-    weather_condition = current_weather.get("condition").get("text")
+    weather = current_weather.get("condition")
+    weather_condition = weather.get("text")
 
     city = location.get("name")
     country = location.get("country")
