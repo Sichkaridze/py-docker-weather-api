@@ -1,7 +1,6 @@
 import os
 import requests
-from pprint import pprint
-from dotenv import  load_dotenv
+from dotenv import load_dotenv
 
 
 load_dotenv()
@@ -9,11 +8,11 @@ load_dotenv()
 API_KEY = os.getenv("API_KEY")
 
 URL = "http://api.weatherapi.com/v1/current.json"
-#URL for getting current weather, for other services check endpoints on
-#https://app.swaggerhub.com/apis-docs/WeatherAPI.com/WeatherAPI/1.0.2
+# URL for getting current weather, for other services check endpoints on
+# https://app.swaggerhub.com/apis-docs/WeatherAPI.com/WeatherAPI/1.0.2
 
 LOCATION = "Paris"
-#Pass US Zipcode, UK Postcode, Canada Postalcode,
+# Pass US Zipcode, UK Postcode, Canada Postalcode,
 # IP address, Latitude/Longitude (decimal degree) or city name.
 # Visit https://www.weatherapi.com/docs/#intro-request to learn more.
 
@@ -36,7 +35,7 @@ def get_weather() -> None:
 
     try:
         assert response.status_code == 200
-    except AssertionError as _:
+    except AssertionError:
         print("Bad request")
 
     data = response.json()
@@ -56,5 +55,7 @@ def get_weather() -> None:
         f"{city}/{country} {last_updated} Weather: "
         f"{temp_c} Celsius, {weather_condition}"
     )
+
+
 if __name__ == "__main__":
     get_weather()
